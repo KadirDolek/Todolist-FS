@@ -13,7 +13,7 @@ const Home = () => {
     const submit = (e) => {
         e.preventDefault();
         post("/todos", {
-            // Siiiii jamais c'est une longue liste, au moins on remonte tout en haut en chien sans le vouloir, on reste au même endroit.
+            // Siiiii jamais c'est une longue liste, au moins on remonte pas tout en haut en chien sans le vouloir, on reste au même endroit.
             preserveScroll: true,
             onSuccess: () => reset(),
         });
