@@ -35,13 +35,6 @@ const Home = () => {
         });
     };
 
-    const clearCompleted = () => {
-        router.post('/todos/clear-completed', {
-            _method: 'DELETE'
-        }, {
-            preserveScroll: true
-        });
-    };
 
     const filteredTodos = todos.filter(todo => {
         if (filter === 'active') return !todo.completed;
@@ -50,7 +43,6 @@ const Home = () => {
     });
 
     const activeTodosCount = todos.filter(todo => !todo.completed).length;
-    const completedTodosCount = todos.filter(todo => todo.completed).length;
 
     return (
         <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-100 text-gray-900'}`}>
@@ -58,6 +50,7 @@ const Home = () => {
                 <div className={`rounded-lg shadow-lg p-6 ${darkMode ? 'bg-gray-800' : 'bg-white'}`}>
                     <header className="flex justify-between items-center mb-6">
                         <h1 className="text-3xl font-bold">TODO</h1>
+                        {/* Ptit darkmode */}
                         <button 
                             className={`p-2 rounded-full text-xl ${darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-200'}`}
                             onClick={() => setDarkMode(!darkMode)}
@@ -65,7 +58,7 @@ const Home = () => {
                             {darkMode ? '☀️' : '🌙'}
                         </button>
                     </header>
-                    
+                    {/* Ca aussi c mon commentaire  */}
                     <form onSubmit={submit} className="flex mb-6">
                         <input
                             type="text"
@@ -73,11 +66,12 @@ const Home = () => {
                             className={`flex-grow py-3 px-4 rounded-l-lg border ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
                             value={data.title}
                             onChange={e => setData('title', e.target.value)}
+                            // Fonction en mode 'process' genre ca arrive tkt, ca le fait actuellement
                             disabled={processing}
                         />
                         <button 
                             type="submit" 
-                            disabled={processing}
+                            disabled={processing} 
                             className="bg-blue-500 hover:bg-blue-600 text-white py-3 px-4 rounded-r-lg font-bold disabled:opacity-50"
                         >
                             {processing ? 'Ajout...' : 'Ajouter'}
@@ -85,7 +79,7 @@ const Home = () => {
                     </form>
 
                     
-                    {/* Todos Container */}
+                   {/* Petite liste pour voir les tâches à faire tavu */}
                     <div className={`rounded-lg border ${darkMode ? 'border-gray-700' : 'border-gray-300'} mb-4`}>
                         {filteredTodos.map(todo => (
                             <div key={todo.id} className={`flex items-center p-4 border-b ${darkMode ? 'border-gray-700' : 'border-gray-300'} last:border-b-0`}>
