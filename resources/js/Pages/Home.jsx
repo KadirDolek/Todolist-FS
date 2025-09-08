@@ -46,7 +46,11 @@ const Home = () => {
 
     return (
         <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-100 text-gray-900'}`}>
-            <div className="container mx-auto px-4 py-8 max-w-2xl">
+             <div 
+                className="w-full h-64 bg-cover bg-center"
+                style={{ backgroundImage: "url('https://cdn.pixabay.com/photo/2022/05/21/03/03/website-7210581_640.png')" }}
+            > </div>
+            <div className="container mx-auto px-4 py-8 max-w-2xl -mt-24">
                 <div className={`rounded-lg shadow-lg p-6 ${darkMode ? 'bg-gray-800' : 'bg-white'}`}>
                     <header className="flex justify-between items-center mb-6">
                         <h1 className="text-3xl font-bold">TODO</h1>
@@ -110,7 +114,6 @@ const Home = () => {
                         )}
                     </div>
                     
-                    {/* Footer */}
                     <div className={`flex flex-col sm:flex-row justify-between items-center text-sm ${darkMode ? 'text-gray-500' : 'text-gray-600'}`}>
                         <span>{activeTodosCount} tâche(s) restante(s)</span>
                         
