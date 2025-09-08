@@ -15,7 +15,6 @@ class TodoController extends Controller
             'todos' => $todo
         ]);
     }  
-
     public function store(Request $request){
         $request->validate([
             'title' => 'required|string|max:255',
@@ -27,7 +26,6 @@ class TodoController extends Controller
         ]);
         return redirect()->back();
     }
-
     public function update(Request $request, Todo $todo){
         $request->validate([
             'completed' => 'boolean',
@@ -35,16 +33,12 @@ class TodoController extends Controller
         ]);
 
         $todo->update($request->only('completed','title'));
-
         return redirect()->back();
     }
-    
     public function destroy(Todo $todo){
         $todo->delete();
         return redirect()->back();
     }
-
-
     public function clearCompleted(){
         Todo::where('completed', true)->delete();
         return redirect()->back();
