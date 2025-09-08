@@ -13,6 +13,7 @@ const Home = () => {
     const submit = (e) => {
         e.preventDefault();
         post('/todos', {
+            // Siiiii jamais c'est une longue liste, au moins on remonte tout en haut en chien sans le vouloir, on reste au même endroit.
             preserveScroll: true,
             onSuccess: () => reset()
         });
@@ -35,7 +36,7 @@ const Home = () => {
         });
     };
 
-
+// J'avoue j'ai eu de l'aide ici 
     const filteredTodos = todos.filter(todo => {
         if (filter === 'active') return !todo.completed;
         if (filter === 'completed') return todo.completed;
@@ -46,6 +47,7 @@ const Home = () => {
 
     return (
         <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-100 text-gray-900'}`}>
+            {/* On avait pas les assets alors j'ai tapé une image au pif */}
              <div 
                 className="w-full h-64 bg-cover bg-center"
                 style={{ backgroundImage: "url('https://cdn.pixabay.com/photo/2022/05/21/03/03/website-7210581_640.png')" }}
@@ -70,7 +72,7 @@ const Home = () => {
                             className={`flex-grow py-3 px-4 rounded-l-lg border ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
                             value={data.title}
                             onChange={e => setData('title', e.target.value)}
-                            // Fonction en mode 'process' genre ca arrive tkt, ca le fait actuellement
+                            // Fonction en mode 'process' genre ca arrive tkt, ca le fait actuellement etc..
                             disabled={processing}
                         />
                         <button 
@@ -104,7 +106,7 @@ const Home = () => {
                                 </button>
                             </div>
                         ))}
-                        
+                        {/* Ici aussi un peu d'aide, les filtres c pas trop mon truc */}
                         {filteredTodos.length === 0 && (
                             <div className="p-4 text-center text-gray-500">
                                 {filter === 'all' && 'Aucune tâche pour le moment'}
