@@ -41,7 +41,7 @@ const Home = () => {
         if (filter === 'completed') return todo.completed;
         return true;
     });
-
+// Pour compter en mode combien il reste de tâches
     const activeTodosCount = todos.filter(todo => !todo.completed).length;
 
     return (
@@ -52,7 +52,7 @@ const Home = () => {
                         <h1 className="text-3xl font-bold">TODO</h1>
                         {/* Ptit darkmode */}
                         <button 
-                            className={`p-2 rounded-full text-xl ${darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-200'}`}
+                            className={`p-2 rounded-full text-xl ${darkMode ? 'hover:bg-gray-700 cursor-pointer' : 'hover:bg-gray-200 cursor-pointer'}`}
                             onClick={() => setDarkMode(!darkMode)}
                         >
                             {darkMode ? '☀️' : '🌙'}
@@ -72,9 +72,9 @@ const Home = () => {
                         <button 
                             type="submit" 
                             disabled={processing} 
-                            className="bg-blue-500 hover:bg-blue-600 text-white py-3 px-4 rounded-r-lg font-bold disabled:opacity-50"
+                            className="bg-gradient-to-l from-slate-500 to-amber-500 hover:from-slate-600 hover:to-amber-600 text-white py-3 px-4 rounded-r-lg font-bold disabled:opacity-50 cursor-pointer"
                         >
-                            {processing ? 'Ajout...' : 'Ajouter'}
+                            {processing ? 'Ajout de tâches...' : 'Ajouter une tâche'}
                         </button>
                     </form>
 
@@ -84,16 +84,16 @@ const Home = () => {
                         {filteredTodos.map(todo => (
                             <div key={todo.id} className={`flex items-center p-4 border-b ${darkMode ? 'border-gray-700' : 'border-gray-300'} last:border-b-0`}>
                                 <div 
-                                    className={`w-6 h-6 rounded-full border-2 flex items-center justify-center mr-4 cursor-pointer transition-colors ${todo.completed ? 'bg-green-500 border-green-500 text-white' : darkMode ? 'border-gray-600 hover:border-gray-500' : 'border-gray-400 hover:border-gray-500'}`}
+                                    className={`w-6 h-6 rounded-full border-2 flex items-center justify-center mr-4 cursor-pointer transition-colors ${todo.completed ? 'bg-amber-500 border-slate-500 text-white' : darkMode ? 'border-gray-600 hover:border-gray-500' : 'border-gray-400 hover:border-gray-500'}`}
                                     onClick={() => toggleTodo(todo)}
                                 >
                                     {todo.completed ? '✓' : ''}
                                 </div>
-                                <span className={`flex-grow ${todo.completed ? 'line-through text-gray-500' : ''}`}>
+                                <span className={`flex-grow ${todo.completed ? 'line-through text-white' : ''}`}>
                                     {todo.title}
                                 </span>
                                 <button 
-                                    className="text-red-500 hover:text-red-700 text-xl font-bold ml-2 transition-colors"
+                                    className="text-red-500 hover:text-red-700 text-xl font-bold ml-2 transition-colors cursor-pointer"
                                     onClick={() => deleteTodo(todo)}
                                 >
                                     ×
@@ -116,19 +116,19 @@ const Home = () => {
                         
                         <div className="flex my-2 sm:my-0">
                             <button 
-                                className={`px-2 py-1 mx-1 rounded transition-colors ${filter === 'all' ? 'bg-blue-500 text-white' : darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-200'}`}
+                                className={`px-2 py-1 mx-1 rounded transition-colors ${filter === 'all' ? 'bg-gradient-to-l from-slate-500 to-amber-500 text-white cursor-pointer' : darkMode ? 'hover:bg-gray-700 cursor-pointer' : 'hover:bg-gray-200 cursor-pointer'}`}
                                 onClick={() => setFilter('all')}
                             >
                                 Toutes
                             </button>
                             <button 
-                                className={`px-2 py-1 mx-1 rounded transition-colors ${filter === 'active' ? 'bg-blue-500 text-white' : darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-200'}`}
+                                className={`px-2 py-1 mx-1 rounded transition-colors ${filter === 'active' ? 'bg-gradient-to-l from-slate-500 to-amber-500 text-white cursor-pointer' : darkMode ? 'hover:bg-gray-700 cursor-pointer' : 'hover:bg-gray-200 cursor-pointer'}`}
                                 onClick={() => setFilter('active')}
                             >
                                 Actives
                             </button>
                             <button 
-                                className={`px-2 py-1 mx-1 rounded transition-colors ${filter === 'completed' ? 'bg-blue-500 text-white' : darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-200'}`}
+                                className={`px-2 py-1 mx-1 rounded transition-colors ${filter === 'completed' ? 'bg-gradient-to-l from-slate-500 to-amber-500 text-white cursor-pointer' : darkMode ? 'hover:bg-gray-700 cursor-pointer' : 'hover:bg-gray-200 cursor-pointer'}`}
                                 onClick={() => setFilter('completed')}
                             >
                                 Terminées
