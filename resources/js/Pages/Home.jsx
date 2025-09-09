@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import { usePage, useForm, router } from "@inertiajs/react";
 
 const Home = () => {
-    const { todos } = usePage().props;
+    // Recup les données de la page
+    const page = usePage();
+    // C les props les données    
+    const props = page.props;    
+    const todos = props.todos;
     const [filter, setFilter] = useState("all");
-    const [darkMode, setDarkMode] = useState(false);
+    const [darkMode, setDarkMode] = useState(true);
 
     const { data, setData, post, processing, reset } = useForm({
         title: "",
@@ -78,7 +82,7 @@ const Home = () => {
                     }`}
                 >
                     <header className="flex justify-between items-center mb-6">
-                        <h1 className="text-3xl font-bold">TODO</h1>
+                        <h1 className="text-3xl font-bold">Todo list</h1>
                         {/* Ptit darkmode */}
                         <button
                             className={`p-2 rounded-full text-xl ${
@@ -96,11 +100,8 @@ const Home = () => {
                         <input
                             type="text"
                             placeholder="Ajouter une nouvelle tâche..."
-                            className={`flex-grow py-3 px-4 rounded-l-lg border ${
-                                darkMode
-                                    ? "bg-gray-700 border-gray-600 text-white"
-                                    : "bg-white border-gray-300 text-gray-900"
-                            }`}
+                            className={`flex-grow py-3 px-4 rounded-l-lg border 
+                                    : "bg-white border-gray-300 text-gray-900"`}
                             value={data.title}
                             onChange={(e) => setData("title", e.target.value)}
                             // Fonction en mode 'process' genre ca arrive tkt, ca le fait actuellement etc..
@@ -126,28 +127,24 @@ const Home = () => {
                         {filteredTodos.map((todo) => (
                             <div
                                 key={todo.id}
-                                className={`flex items-center p-4 border-b ${
-                                    darkMode
-                                        ? "border-gray-700"
-                                        : "border-gray-300"
-                                } last:border-b-0`}
+                                className={`flex items-center p-4 border-b 
+                                    border-gray-300
+                                 last:border-b-0`}
                             >
                                 <div
                                     className={`w-6 h-6 rounded-full border-2 flex items-center justify-center mr-4 cursor-pointer transition-colors ${
                                         todo.completed
-                                            ? "bg-amber-500 border-slate-500 text-white"
-                                            : darkMode
-                                            ? "border-gray-600 hover:border-gray-500"
+                                            ? "bg-amber-500 border-slate-500 text-gray-300"
                                             : "border-gray-400 hover:border-gray-500"
                                     }`}
                                     onClick={() => toggleTodo(todo)}
                                 >
-                                    {todo.completed ? "✓" : ""}
+                                    {todo.completed ? "" : ""}
                                 </div>
                                 <span
                                     className={`flex-grow ${
                                         todo.completed
-                                            ? "line-through text-white"
+                                            ? "line-through text-gray-300"
                                             : ""
                                     }`}
                                 >

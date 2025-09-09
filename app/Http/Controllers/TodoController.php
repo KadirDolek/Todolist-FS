@@ -10,7 +10,7 @@ class TodoController extends Controller
 {
     public function index()
     {
-        $todo = Todo::orderBy('created_at')->get();
+        $todo = Todo::all();
         return Inertia::render('Home', [
             'todos' => $todo
         ]);
