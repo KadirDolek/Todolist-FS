@@ -19,9 +19,17 @@ const Home = () => {
         post("/todos", {
             // Siiiii jamais c'est une longue liste, au moins on remonte pas tout en haut en chien sans le vouloir, on reste au même endroit.
             preserveScroll: true,
+            // Si c bon on ca envoie et ca reset le form
             onSuccess: () => reset(),
         });
     };
+
+// Ne marche pas 
+//     const toggleTodo = (todo) => {
+//     router.put(`/todos/${todo.id}`, {
+//         completed: !todo.completed,
+//     });
+// };
 
     const toggleTodo = (todo) => {
         router.post(
@@ -31,7 +39,7 @@ const Home = () => {
                 _method: "PUT",
             },
             {
-                preserveScroll: true,
+                preserveScroll: true
             }
         );
     };
@@ -40,13 +48,25 @@ const Home = () => {
         router.post(
             `/todos/${todo.id}`,
             {
-                _method: "DELETE",
+                _method: "DELETE"
             },
             {
-                preserveScroll: true,
+                preserveScroll: true
             }
         );
     };
+
+    const deleteAll = (todo) =>{
+        router.post(
+            `/todos/clear-completed`,
+            {
+                _method:"POST"
+            },
+            {
+                preserveScroll:true
+            }
+        )
+    }
 
     // J'avoue j'ai eu de l'aide ici
     const filteredTodos = todos.filter((todo) => {
@@ -65,7 +85,7 @@ const Home = () => {
                     : "bg-gray-100 text-gray-900"
             }`}
         >
-            {/* On avait pas les assets alors j'ai tapé une image au pif */}
+            {/* Une image au pif */}
             <div
                 className="w-full h-64 bg-cover bg-center"
                 style={{
@@ -83,6 +103,7 @@ const Home = () => {
                 >
                     <header className="flex justify-between items-center mb-6">
                         <h1 className="text-3xl font-bold">Todo list</h1>
+                        <button className="cursor-pointer border-1 rounded-2xl px-6 text-gray-100 font-semibold bg-gradient-to-l from-slate-500 to-amber-500 hover:from-amber-600 hover:to-amber-500" onClick={deleteAll}>Supprimer les tâches faites.</button>
                         {/* Ptit darkmode */}
                         <button
                             className={`p-2 rounded-full text-xl ${
@@ -100,8 +121,12 @@ const Home = () => {
                         <input
                             type="text"
                             placeholder="Ajouter une nouvelle tâche..."
-                            className={`flex-grow py-3 px-4 rounded-l-lg border 
-                                    : "bg-white border-gray-300 text-gray-900"`}
+                            className={
+                            darkMode
+                                ? "flex-grow py-3 px-4 rounded-l-lg border"
+                                : " flex-grow bg-white border-gray-300 text-gray-900"
+                            }
+
                             value={data.title}
                             onChange={(e) => setData("title", e.target.value)}
                             // Fonction en mode 'process' genre ca arrive tkt, ca le fait actuellement etc..
@@ -110,7 +135,7 @@ const Home = () => {
                         <button
                             type="submit"
                             disabled={processing}
-                            className="bg-gradient-to-l from-slate-500 to-amber-500 hover:from-slate-600 hover:to-amber-600 text-white py-3 px-4 rounded-r-lg font-bold disabled:opacity-50 cursor-pointer"
+                            className="bg-gradient-to-l from-slate-500 to-amber-500 hover:from-amber-600 hover:to-amber-500 text-white py-3 px-4 rounded-r-lg font-bold disabled:opacity-50 cursor-pointer"
                         >
                             {processing
                                 ? "Ajout de tâches..."
@@ -178,6 +203,7 @@ const Home = () => {
                         <span>{activeTodosCount} tâche(s) restante(s)</span>
 
                         <div className="flex my-2 sm:my-0">
+                            
                             <button
                                 className={`px-2 py-1 mx-1 rounded transition-colors ${
                                     filter === "all"
