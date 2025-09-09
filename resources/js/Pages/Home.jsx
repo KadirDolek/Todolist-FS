@@ -35,7 +35,7 @@ const Home = () => {
         router.post(
             `/todos/${todo.id}`,
             {
-                // Check si c'est complet, si ca ne l'est pas, ca execute la fonction
+                // Complet ou pas en mode toggle sur un click
                 completed: !todo.completed,
                 _method: "PUT",
             },
@@ -76,7 +76,7 @@ const Home = () => {
         return true;
     });
     // Pour compter en mode combien il reste de tâches
-    const activeTodosCount = todos.filter((todo) => !todo.completed).length;
+    const TodosCount = todos.filter((todo) => !todo.completed).length;
 
     return (
         <div
@@ -203,7 +203,7 @@ const Home = () => {
                             darkMode ? "text-gray-500" : "text-gray-600"
                         }`}
                     >
-                        <span>{activeTodosCount} tâche(s) restante(s)</span>
+                        <span>{TodosCount} tâche(s) restante(s)</span>
 
                         <div className="flex my-2 sm:my-0">
                             
