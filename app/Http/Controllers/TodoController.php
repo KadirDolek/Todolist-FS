@@ -19,7 +19,7 @@ class TodoController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
         ]);
-
+        // Apparait sous l'input marqué et non complété
         Todo::create([
             'title' => $request->title,
             'completed' => false
@@ -39,7 +39,7 @@ class TodoController extends Controller
         $todo->delete();
         return redirect()->back();
     }
-    // Une autre fonction 
+    // Une autre fonction pour effacer toutes les tâches faites en one click
     public function clearCompleted(){
         Todo::where('completed', true)->delete();
         return redirect()->back();
