@@ -35,6 +35,7 @@ const Home = () => {
         router.post(
             `/todos/${todo.id}`,
             {
+                // Check si c'est complet, si ca ne l'est pas, ca execute la fonction
                 completed: !todo.completed,
                 _method: "PUT",
             },
@@ -56,7 +57,7 @@ const Home = () => {
         );
     };
 
-    const deleteAll = (todo) =>{
+    const deleteAll = () =>{
         router.post(
             `/todos/clear-completed`,
             {
@@ -103,7 +104,9 @@ const Home = () => {
                 >
                     <header className="flex justify-between items-center mb-6">
                         <h1 className="text-3xl font-bold">Todo list</h1>
-                        <button className="cursor-pointer border-1 rounded-2xl px-6 text-gray-100 font-semibold bg-gradient-to-l from-slate-500 to-amber-500 hover:from-amber-600 hover:to-amber-500" onClick={deleteAll}>Supprimer les tâches faites.</button>
+                        <button className="cursor-pointer border-0 rounded-2xl px-6 text-gray-100 font-semibold 
+                        bg-gradient-to-l from-slate-500 to-amber-500 hover:from-amber-600 hover:to-amber-500" 
+                        onClick={deleteAll}>Supprimer les tâches faites.</button>
                         {/* Ptit darkmode */}
                         <button
                             className={`p-2 rounded-full text-xl ${
